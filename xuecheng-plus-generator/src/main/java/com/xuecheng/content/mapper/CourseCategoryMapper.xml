@@ -18,4 +18,5 @@
         id, name, label, parentid, is_show, orderby, is_leaf
     </sql>
 
+
 </mapper>

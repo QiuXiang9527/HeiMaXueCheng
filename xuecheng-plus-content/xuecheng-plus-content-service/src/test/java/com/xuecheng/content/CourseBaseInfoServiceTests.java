@@ -43,6 +43,9 @@ public class CourseBaseInfoServiceTests {
 
         PageResult<CourseBase> courseBasePageResult = courseBaseInfoService.queryCourseBaseList(pageParams, courseParamsDto);
         System.out.println(courseBasePageResult);
+    }
+    @Test
+    public void testCourseBaseInfoadd() {
 
     }
 }

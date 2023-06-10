@@ -1,0 +1,4 @@
+###查询系统字典表所有数据
+GET http://localhost:63110/system/dictionary/all
+###查询系统字典表 参数{string:code}
+GET http://localhost:63110/system/dictionary/code/201

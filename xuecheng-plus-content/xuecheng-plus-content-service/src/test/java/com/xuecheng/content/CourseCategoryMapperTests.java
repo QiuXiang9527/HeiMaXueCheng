@@ -9,6 +9,7 @@ import com.xuecheng.content.mapper.CourseCategoryMapper;
 import com.xuecheng.content.model.dto.CourseCategoryTreeDto;
 import com.xuecheng.content.model.dto.QueryCourseParamsDto;
 import com.xuecheng.content.model.po.CourseBase;
+import com.xuecheng.content.model.po.CourseCategory;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -33,5 +34,10 @@ public class CourseCategoryMapperTests {
     public void testCourseCategoryMapper() {
         List<CourseCategoryTreeDto> courseCategoryTreeDtos = courseCategoryMapper.selectTreeNodes("1");
         System.out.println(courseCategoryTreeDtos);
+    }
+    @Test
+    public void testCourseCategoryMapperByid() {
+        CourseCategory courseCategory = courseCategoryMapper.selectById("1-1-1");
+
     }
 }

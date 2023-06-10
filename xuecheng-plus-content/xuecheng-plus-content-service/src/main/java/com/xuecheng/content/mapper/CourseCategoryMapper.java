@@ -17,5 +17,5 @@ public interface CourseCategoryMapper extends BaseMapper<CourseCategory> {
 
     //使用递归查询分类
     public List<CourseCategoryTreeDto> selectTreeNodes(String id);
-
+    public CourseCategory selectById(String id);
 }
