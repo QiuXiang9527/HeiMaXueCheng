@@ -35,6 +35,7 @@ public class CourseBaseInfoServiceTests {
         QueryCourseParamsDto courseParamsDto = new QueryCourseParamsDto();
         courseParamsDto.setCourseName("java");//课程名称查询条件
         courseParamsDto.setAuditStatus("202004");//202004表示课程审核通过
+        courseParamsDto.setPublishStatus("203001");//203001表示课程未发布
         //分页参数对象
         PageParams pageParams = new PageParams();
         pageParams.setPageNo(2L);

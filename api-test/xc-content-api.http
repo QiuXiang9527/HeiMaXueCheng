@@ -5,7 +5,7 @@ Content-Type: application/json
 {
   "auditStatus": "202004",
   "courseName": "java",
-  "publishStatus":""
+  "publishStatus":"203001"
 }
 
 ### 查询课程分类

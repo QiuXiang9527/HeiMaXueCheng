@@ -37,8 +37,10 @@ public class CourseBaseMapperTests {
         QueryCourseParamsDto courseParamsDto = new QueryCourseParamsDto();
         courseParamsDto.setCourseName("java");//课程名称查询条件
 
+
         //拼装查询条件
         LambdaQueryWrapper<CourseBase> queryWrapper = new LambdaQueryWrapper<>();
+
         //根据名称模糊查询,在sql中拼接 course_base.name like '%值%'
         queryWrapper.like(StringUtils.isNotEmpty(courseParamsDto.getCourseName()),CourseBase::getName,courseParamsDto.getCourseName());
         //根据课程审核状态查询 course_base.audit_status = ?
@@ -55,6 +57,7 @@ public class CourseBaseMapperTests {
         Page<CourseBase> pageResult = courseBaseMapper.selectPage(page, queryWrapper);
         //数据列表
         List<CourseBase> items = pageResult.getRecords();
+
         //总记录数
         long total = pageResult.getTotal();
 
