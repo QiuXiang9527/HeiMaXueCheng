@@ -2,17 +2,24 @@ package com.xuecheng.content;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.xuecheng.base.exception.XueChengPlusException;
 import com.xuecheng.base.model.PageParams;
 import com.xuecheng.base.model.PageResult;
 import com.xuecheng.content.mapper.CourseBaseMapper;
+import com.xuecheng.content.model.dto.CourseBaseInfoDto;
+import com.xuecheng.content.model.dto.EditCourseDto;
 import com.xuecheng.content.model.dto.QueryCourseParamsDto;
 import com.xuecheng.content.model.po.CourseBase;
+import com.xuecheng.content.model.po.CourseMarket;
+import com.xuecheng.content.service.impl.CourseBaseInfoServiceImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -26,7 +33,8 @@ public class CourseBaseMapperTests {
 
     @Autowired
     CourseBaseMapper courseBaseMapper;
-
+    @Autowired
+    CourseBaseInfoServiceImpl courseBaseInfoService;
     @Test
     public void testCourseBaseMapper() {
         CourseBase courseBase = courseBaseMapper.selectById(18);
@@ -64,5 +72,34 @@ public class CourseBaseMapperTests {
         //List<T> items, long counts, long page, long pageSize
         PageResult<CourseBase> courseBasePageResult = new PageResult<CourseBase>(items,total,pageParams.getPageNo(), pageParams.getPageSize());
         System.out.println(courseBasePageResult);
+
+    }
+    @Test
+    public void update(){
+        EditCourseDto editCourseDto = new EditCourseDto();
+//        {
+//            "id": 40,
+//                "companyName": null,
+//                "name": "SpringBoot核心",
+//                "users": "Spring Boot初学者",
+//                "tags": "Spring项目的快速构建",
+//                "mt": "1-3",
+//                "st": "1-3-2",
+//                "grade": "200003",
+//                "teachmode": "201001",
+//                "description": "课程系统性地深度探讨 Spring Boot 核心特性，引导小伙伴对 Java 规范的重视，启发对技术原理性的思考，掌握排查问题的技能，以及学习阅读源码的方法和技巧，全面提升研发能力，进军架构师队伍。",
+//                "pic": "https://cdn.educba.com/academy/wp-content/uploads/2018/08/Spring-BOOT-Interview-questions.jpg",
+//                "charge": "201001",
+//                "price": 0.01
+//        }
+        editCourseDto.setId(40L);
+        editCourseDto.setName("SpringBoot边缘");
+        editCourseDto.setUsers("Spring Boot初学者");
+        editCourseDto.setMt("1-3");
+        editCourseDto.setSt("1-3-2");
+        editCourseDto.setGrade("200003");
+        editCourseDto.setCharge("201001");
+        CourseBaseInfoDto courseBaseInfoDto = courseBaseInfoService.updateCourseBase(editCourseDto);
+
     }
 }

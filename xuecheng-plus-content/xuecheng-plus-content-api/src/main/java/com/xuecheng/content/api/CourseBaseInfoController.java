@@ -5,6 +5,7 @@ import com.xuecheng.base.model.PageParams;
 import com.xuecheng.base.model.PageResult;
 import com.xuecheng.content.model.dto.AddCourseDto;
 import com.xuecheng.content.model.dto.CourseBaseInfoDto;
+import com.xuecheng.content.model.dto.EditCourseDto;
 import com.xuecheng.content.model.dto.QueryCourseParamsDto;
 import com.xuecheng.content.model.po.CourseBase;
 import com.xuecheng.content.service.CourseBaseInfoService;
@@ -12,10 +13,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -45,7 +43,7 @@ public class CourseBaseInfoController {
     }
     @ApiOperation("新增课程")
     @PostMapping("/course")
-    public CourseBaseInfoDto createCourseBase(@RequestBody @Validated({ValidationGroups.Update.class}) AddCourseDto addCourseDto){
+    public CourseBaseInfoDto createCourseBase(@RequestBody @Validated({ValidationGroups.Inster.class}) AddCourseDto addCourseDto){
         //获取到用户所属机构的id
         Long companyId = 1232141425L;
 //        int i = 1/0;
@@ -53,4 +51,23 @@ public class CourseBaseInfoController {
         return courseBase;
     }
 
+    /**
+     * 根据课程ID查询课程详情
+     * @param courseId
+     * @return
+     */
+    @ApiOperation("查询课程")
+    @GetMapping("/course/{courseId}")
+    public CourseBaseInfoDto selectCourseBase(@PathVariable Long courseId){
+        //获取到用户所属机构的id
+        CourseBaseInfoDto courseBaseInfo = courseBaseInfoService.getCourseBaseInfo(courseId);
+        return courseBaseInfo;
+    }
+    @ApiOperation("修改")
+    @PutMapping("/course")
+    public CourseBaseInfoDto updateCourseBase(@RequestBody @Validated EditCourseDto editCourseDto){
+        //获取到用户所属机构的id
+        CourseBaseInfoDto courseBaseInfoDto = courseBaseInfoService.updateCourseBase(editCourseDto);
+        return courseBaseInfoDto;
+    }
 }

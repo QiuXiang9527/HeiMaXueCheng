@@ -45,7 +45,7 @@ public class CourseBaseInfoServiceTests {
         System.out.println(courseBasePageResult);
     }
     @Test
-    public void testCourseBaseInfoadd() {
+    public void testCourseBaseInfoUpdate() {
 
     }
 }
