@@ -94,6 +94,15 @@
     <select id="selectSonCount" resultType="java.lang.Integer">
         select count(*) count from teachplan p inner join teachplan s on p.id=s.parentid where p.id = #{id};
     </select>
+    <select id="selectOrderByField" resultType="java.lang.Integer">
+        select orderby
+        from (select *
+              from teachplan
+              where parentid = (select parentid from teachplan where id = #{id})
+                and course_id = (select course_id from teachplan where id = #{id})
+              order by orderby) as temp;
+    </select>
+
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, pname, parentid, grade, media_type, start_time, end_time, description, timelength, orderby, course_id, course_pub_id, status, is_preview, create_date, change_date

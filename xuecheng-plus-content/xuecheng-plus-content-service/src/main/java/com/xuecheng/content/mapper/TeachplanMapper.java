@@ -23,4 +23,6 @@ public interface TeachplanMapper extends BaseMapper<Teachplan> {
      */
     public List<TeachplanDto> selectTreeNodes(long courseId);
     public Integer selectSonCount(Long id);
+
+    public List<Integer> selectOrderByField(Long id);
 }

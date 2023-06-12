@@ -7,6 +7,7 @@ import com.xuecheng.content.model.dto.CourseBaseInfoDto;
 import com.xuecheng.content.model.dto.EditCourseDto;
 import com.xuecheng.content.model.dto.QueryCourseParamsDto;
 import com.xuecheng.content.model.po.CourseBase;
+import com.xuecheng.content.model.po.CourseTeacher;
 
 /**
  * @author Mr.M
@@ -33,5 +34,6 @@ public interface CourseBaseInfoService {
     public CourseBaseInfoDto createCourseBase(Long companyId,AddCourseDto addCourseDto);
     public CourseBaseInfoDto getCourseBaseInfo(long courseId);
     public CourseBaseInfoDto updateCourseBase(EditCourseDto editCourseDto);
+
 
 }

@@ -3,6 +3,7 @@ package com.xuecheng.content.api;
 import com.xuecheng.base.model.R;
 import com.xuecheng.content.model.dto.SaveTeachplanDto;
 import com.xuecheng.content.model.dto.TeachplanDto;
+import com.xuecheng.content.model.po.CourseTeacher;
 import com.xuecheng.content.service.TeachplanService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -40,6 +41,19 @@ public class TeachplanController {
     public R<String> saveTeachplan(@PathVariable Long id){
 
         teachplanService.deleteById(id);
-        return R.success("200");
+        return R.success(null,"200");
     }
+    @ApiOperation("课程计划上移")
+    @PostMapping("/teachplan/moveup/{id}")
+    public void moveup(@PathVariable Long id){
+
+        teachplanService.moveup(id);
+
+    }
+    @ApiOperation("课程计划下移")
+    @PostMapping("/teachplan/movedown/{id}")
+    public void movedown(@PathVariable Long id){
+        teachplanService.movedown(id);
+    }
+
 }
