@@ -60,7 +60,6 @@ public class CourseBaseInfoServiceImpl implements CourseBaseInfoService {
         Page<CourseBase> page = new Page<>(pageParams.getPageNo(), pageParams.getPageSize());
         //开始进行分页查询
         Page<CourseBase> pageResult = courseBaseMapper.selectPage(page, queryWrapper);
-        System.out.println("xixi");
         //数据列表
         List<CourseBase> items = pageResult.getRecords();
         //总记录数
@@ -77,7 +76,7 @@ public class CourseBaseInfoServiceImpl implements CourseBaseInfoService {
 
         //参数的合法性校验 以使用自动化框架
 //        if (StringUtils.isBlank(dto.getName())) {
-////            XueChengPlusException.cast("课程名称为空");
+//           XueChengPlusException.cast("课程名称为空");
 //            XueChengPlusException.cast("课程名称为空");
 //        }
 //        if (StringUtils.isBlank(dto.getMt())) {
