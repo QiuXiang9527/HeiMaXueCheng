@@ -3,6 +3,7 @@ package com.xuecheng.content.api;
 import com.xuecheng.base.exception.ValidationGroups;
 import com.xuecheng.base.model.PageParams;
 import com.xuecheng.base.model.PageResult;
+import com.xuecheng.base.model.R;
 import com.xuecheng.content.model.dto.AddCourseDto;
 import com.xuecheng.content.model.dto.CourseBaseInfoDto;
 import com.xuecheng.content.model.dto.EditCourseDto;
@@ -64,11 +65,18 @@ public class CourseBaseInfoController {
         CourseBaseInfoDto courseBaseInfo = courseBaseInfoService.getCourseBaseInfo(courseId);
         return courseBaseInfo;
     }
-    @ApiOperation("修改")
+    @ApiOperation("修改课程")
     @PutMapping("/course")
     public CourseBaseInfoDto updateCourseBase(@RequestBody @Validated EditCourseDto editCourseDto){
         //获取到用户所属机构的id
         CourseBaseInfoDto courseBaseInfoDto = courseBaseInfoService.updateCourseBase(editCourseDto);
         return courseBaseInfoDto;
+    }
+    @ApiOperation("删除课程")
+    @DeleteMapping("/course/{id}")
+    public R deleteCourseBase(@PathVariable Long id){
+        //获取到用户所属机构的id
+        courseBaseInfoService.deleteById(id);
+        return R.success(null,"200");
     }
 }

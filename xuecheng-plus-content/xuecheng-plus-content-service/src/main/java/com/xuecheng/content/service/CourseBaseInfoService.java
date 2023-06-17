@@ -36,4 +36,5 @@ public interface CourseBaseInfoService {
     public CourseBaseInfoDto updateCourseBase(EditCourseDto editCourseDto);
 
 
+    void deleteById(Long id);
 }
