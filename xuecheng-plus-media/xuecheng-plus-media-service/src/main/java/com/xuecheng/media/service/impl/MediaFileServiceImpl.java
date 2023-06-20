@@ -7,6 +7,8 @@ import com.j256.simplemagic.ContentInfoUtil;
 import com.xuecheng.base.exception.XueChengPlusException;
 import com.xuecheng.base.model.PageParams;
 import com.xuecheng.base.model.PageResult;
+import com.xuecheng.media.mapper.MediaProcessMapper;
+import com.xuecheng.media.model.po.MediaProcess;
 import io.minio.messages.DeleteError;
 import io.minio.messages.DeleteObject;
 import org.apache.commons.io.IOUtils;
@@ -56,6 +58,8 @@ public class MediaFileServiceImpl implements MediaFileService {
     MinioClient minioClient;
     @Value(("${minio.bucket.videofiles}"))
     private  String bucket_videoFiles;
+    @Autowired
+    MediaProcessMapper mediaProcessMapper;
     @Override
     public PageResult<MediaFiles> queryMediaFiels(Long companyId, PageParams pageParams, QueryMediaParamsDto queryMediaParamsDto) {
 
@@ -126,15 +130,30 @@ public class MediaFileServiceImpl implements MediaFileService {
                 log.error("保存文件信息到数据库失败,{}", mediaFiles.toString());
                 XueChengPlusException.cast("保存文件信息失败");
             }
+
+            addWaitingTask(mediaFiles);
             log.debug("保存文件信息到数据库成功,{}", mediaFiles.toString());
 
         }
         return mediaFiles;
     }
 
+    private void addWaitingTask(MediaFiles mediaFiles) {
+        String filename = mediaFiles.getFilename();
+        String substring = filename.substring(filename.lastIndexOf("."));
+        String mimeType = getMimeType(substring);
+        if (mimeType.equals("video/x-msvideo")){
+            MediaProcess mediaProcess = new MediaProcess();
+            BeanUtils.copyProperties(mediaFiles,mediaProcess);
+            mediaProcess.setStatus("1"); //设置avi文件未处理
+            mediaProcess.setFailCount(0); //设置失败次数为0
+            mediaProcess.setId(null);
+            mediaProcessMapper.insert(mediaProcess);
+        }
+    }
 
 
-    private boolean addMediaFilesToMinIO(String localFilePath, String mimeType, String bucket, String objectName) {
+    public boolean addMediaFilesToMinIO(String localFilePath, String mimeType, String bucket, String objectName) {
         try {
             UploadObjectArgs testbucket = UploadObjectArgs.builder()
                     .bucket(bucket)

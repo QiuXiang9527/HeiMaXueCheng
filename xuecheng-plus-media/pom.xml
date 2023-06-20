@@ -12,7 +12,13 @@
     <name>xuecheng-plus-media</name>
     <description>xuecheng-plus-media</description>
     <packaging>pom</packaging>
-
+    <dependencies>
+        <dependency>
+            <groupId>com.xuecheng</groupId>
+            <artifactId>xuecheng-plus-base</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
     <modules>
         <module>xuecheng-plus-media-api</module>
         <module>xuecheng-plus-media-service</module>

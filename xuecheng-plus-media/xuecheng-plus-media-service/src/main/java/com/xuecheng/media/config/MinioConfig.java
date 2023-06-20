@@ -1,4 +1,4 @@
-package com.xuecheng.config;
+package com.xuecheng.media.config;
 
 
 import io.minio.MinioClient;
